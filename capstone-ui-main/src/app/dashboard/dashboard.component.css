@@ -1,0 +1,46 @@
+   .hamburger-menu {
+  position: absolute;
+  top: 110px;
+  right: 600px;
+}
+
+
+.customer-details-card-container {
+  position: absolute;
+  top: 15px;
+  right: 65px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, width 0.5s ease-in-out; 
+  transform: translateY(-100%);
+  width: 200px; 
+}
+
+.customer-details-card-container.show-card {
+  opacity: 1;
+  transform: translateY(0);
+  width: 250px;
+}
+
+.customer-details-card {
+  width: 100%; 
+}
+
+.content-container {
+  margin-top: 0px;
+  margin-bottom: 200px;
+}
+
+.big-font{
+  font-size: 30px;
+  color: #303F9F;
+}
+
+.card-title{
+  font-size: 20px;
+}
+
+
+.light-blue{
+  color: #036bfc;
+}
+

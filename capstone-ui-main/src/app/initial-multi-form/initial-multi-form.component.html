@@ -1,0 +1,102 @@
+<mat-stepper [linear]="isLinear" #stepper>
+    <form [formGroup]="Leadregister">
+
+    <mat-step [stepControl]="indicState">
+      <div formGroupName="indicativeState">
+        <ng-template matStepLabel>Find Eligibility</ng-template>
+        
+        <div style="padding-top: 40px;">
+          <p style="font-size: 24px;">Selected Debt: {{ "$" + slider.value }}</p>
+          <mat-slider class="long-slider" min="0" max="100000" step="5000" showTickMarks (input)="onSliderChange(slider)">
+            <input matSliderThumb formControlName="debt" #slider >
+          </mat-slider>
+        </div>        
+
+
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state" required>
+            <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+      
+        <div>
+          <button (click)="findEligibility()" class="custom-button">Find Eligibility</button>
+          <button (click)="onSubmit()" matStepperNext [disabled]="!isApproved" class="custom-button">Next</button>
+        </div>
+        
+        
+
+        <div class="mb-2">
+            <div *ngIf="isApproved" class="msg approve-text">
+              {{ Msg }}
+            </div>
+  
+          <div *ngIf="!isApproved" class="msg disapprove-text">
+            {{ Msg }}
+          </div>
+      </div>
+
+
+
+
+      </div>
+    </mat-step>
+    
+
+
+    <mat-step [stepControl]="newLead" label="Fill out personal information">
+      <div formGroupName="leadForm">
+        <div *ngFor = 'let lead of leadListArray().controls; let i = index'>
+          <div [formGroupName] = 'i'>
+            <mat-form-field>
+              <mat-label>Lender</mat-label>
+              <mat-select formControlName="lender_name" required>
+                <mat-option *ngFor="let lender of sortedLenders" [value]="lender">{{ lender }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Debt Owed</mat-label>
+              <input matInput formControlName="debt_owed" placeholder="$$$" required>
+            </mat-form-field>
+            
+            <button  *ngIf="leadListArray().length > 1" (click)="removeDebtSource(i)" class="custom-button">Remove</button>
+          </div> 
+        </div>
+        <button (click)="addDebtSource()" class="custom-button">Add</button>
+        <div>
+          <button matStepperPrevious class="custom-button">Back</button>
+          <button (click)="getFormData()" matStepperNext class="custom-button">Next</button>
+        </div>
+    </div>
+    </mat-step>
+
+    <mat-step [stepControl]="regNewLead">
+    <div formGroupName="registerForm">
+      <ng-template matStepLabel>Register</ng-template>
+
+      <div *ngFor = "let item of offerPlans">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ item.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Program Length: {{ item.program_length}} Months</p>
+            <p>Total Debt: {{ item.debt | currency}}</p>
+            <p>Total Settlement Cost: {{ item.total_settlement_cost | currency }}</p>
+            <p>Program Fees: {{ item.program_fees | currency }}</p>
+            <p><strong><span class="light-blue">Monthly cost:</span> {{ item.total_monthly_cost | currency }}</strong></p>
+            <p><strong>Total Cost: {{ item.total_cost_of_program| currency }}</strong></p>
+          </mat-card-content>
+          <button  class="custom-button" (click) = "selectOffer(item)">Select</button>
+        </mat-card>
+        <br>
+        <br>
+      </div>
+      
+    </div>
+    </mat-step>
+
+    </form>
+</mat-stepper>

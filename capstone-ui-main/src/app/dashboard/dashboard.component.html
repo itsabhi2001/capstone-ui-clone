@@ -1,0 +1,77 @@
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+
+<main class="container mt-4" *ngIf="customer && offer">
+  <div class="hamburger-menu">
+    <button (click)="toggleCustomerDetails()">☰</button>
+    <div class="customer-details-card-container" [ngClass]="{'show-card': showCustomerDetails}">
+
+      <div class="customer-details-card card">
+        <div class="card-body">
+          <h2>Customer Details</h2>
+          <p>Username: {{ customer.userName }}</p>
+          <p>Name: {{ customer.firstName }} {{ customer.lastName }}</p>
+          <button class="btn btn-danger" (click)="logout()">Logout</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <section class="row">
+      <article class="col-md-6">
+        <header>
+          <h2 class="big-font">Offer Details</h2>
+        </header>
+        <div>
+          <label for="offerName">Name:</label>
+          <p id="offerName">{{ offer.name }}</p>
+          <label for="programLength">Program Length:</label>
+          <p id="programLength">{{ offer.programLength }} months</p>
+          <label for="debt">Debt:</label>
+          <p id="debt">${{ offer.debt | number:'1.2-2' }}</p>
+          <label for="programFees">Program Fees:</label>
+          <p id="programFees">${{ offer.programFees | number:'1.2-2' }}</p>
+          <label for="settlementCost">Total Settlement Cost:</label>
+          <p id="settlementCost">${{ offer.totalSettlementCost | number:'1.2-2' }}</p>
+          <label for="totalCost"><strong>Total Cost of Program:</strong></label>
+          <p id="totalCost">${{ offer.totalCostOfProgram | number:'1.2-2' }}</p>
+          <label for="monthlyCost"><strong class="light-blue">Total Monthly Cost:</strong></label>
+          <p id="monthlyCost"> ${{ offer.totalMonthlyCost | number:'1.2-2' }}</p>
+          
+        </div>
+      </article>
+    </section>
+
+    <hr>
+
+    <section *ngIf="seperateCreditorData.length > 0">
+      <header>
+        <h2 class="big-font">Creditor Information</h2>
+      </header>
+      <div>
+        <article *ngFor="let settlementInfo of seperateCreditorData" class="card mb-3">
+          <div class="card-body">
+            <h3 class="card-title">{{ settlementInfo.creditorName }}</h3>
+            <p class="card-text"><strong>Settlement Rate:</strong> {{ settlementInfo.settlementRate | percent:'1.2-2' }}</p>
+            <p class="card-text"><strong>Settlement Cost:</strong> ${{ settlementInfo.settlementCost | number:'1.2-2' }}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="big-font">Financial Overview</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+          <h2>Bar Chart</h2>
+          <canvas id="barChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-md-6 text-center">
+          <h2>Total Program Cost Distribution</h2>
+          <canvas id="pieChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

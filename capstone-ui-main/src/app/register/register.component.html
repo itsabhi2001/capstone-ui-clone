@@ -1,0 +1,106 @@
+<div class="container d-flex justify-content-center align-items-center" style="height: 90vh;">
+<div class="card" style="width: 50%">
+  <h4 class="card-header">Sign up</h4>
+  <div class="card-body">
+    <form [formGroup]="registerForm">
+
+      <div class="mb-3">
+        <div *ngIf="isError" class="errormsg">
+          {{errorMsg}}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">First Name </label>
+        <input type="text" formControlName="firstName" placeholder="Enter First Name "
+               class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Last Name </label>
+        <input type="text" formControlName="lastName" placeholder="Enter Last Name "
+               class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" formControlName="username" placeholder="Enter username "
+               class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" formControlName="password" placeholder="Enter Password "
+               class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </div>
+
+     
+      <mat-form-field class="mt-3" style="width: 100%; height:90px">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" [value]="dob" (dateChange)="dob = $event.value" style="height: 20px;">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+          <div *ngIf="f.dob.errors.required">Date is required</div>
+        </div>
+      </mat-form-field>
+      
+
+
+      
+
+  <mat-card *ngIf="displayedOffer" class="displayed-offer-container">
+      <mat-card-content>
+
+    <div>
+      <h3>Chosen Offer Details:</h3>
+      <ul>
+        <li><strong>Name:</strong> {{ displayedOffer.name }}</li>
+        <li><strong>Program Length:</strong> {{ displayedOffer.program_length }}</li>
+        <li><strong>Debt:</strong> {{ displayedOffer.debt | currency }}</li>
+        <li><strong>Total Settlement Cost:</strong> {{ displayedOffer.total_settlement_cost | currency }}</li>
+        <li><strong>Program Fees:</strong> {{ displayedOffer.program_fees | currency }}</li>
+        <li><strong>Subscription Fees:</strong> {{ displayedOffer.monthly_fees | currency }}</li>
+        <li><strong>Total Cost of Program:</strong> {{ displayedOffer.total_cost_of_program | currency }}</li>
+        <li><strong class="light-blue">Total Monthly Cost:</strong> {{ displayedOffer.total_monthly_cost | currency }}</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Creditor Offers:</h3>
+      <ul *ngFor="let creditorOffer of displayedOffer.individualCreditorOfferList">
+        <li>
+          <strong>Creditor Name:</strong> {{ creditorOffer.creditorName }}
+          <ul>
+            <li><strong>Settlement Rate:</strong> {{ creditorOffer.settlementRate | percent }}</li>
+            <li><strong>Settlement Cost:</strong> {{ creditorOffer.settlementCost | currency }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+<div class="mb-3 d-flex justify-content-center"> 
+  <button [disabled]="loading" class="btn btn-primary" (click)="onSubmit()" class="custom-button">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

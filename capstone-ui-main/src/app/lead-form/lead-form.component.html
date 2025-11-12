@@ -1,0 +1,102 @@
+<div class="card" style="width: 30%">
+    <h4 class="card-header">Lead Info Form</h4>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="mb-3">
+            <div *ngIf="isError" class="errormsg">
+              {{errorMsg}}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">First Name </label>
+            <input type="text" formControlName="firstName" placeholder="Enter First Name "
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors.required">First Name is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Last Name </label>
+            <input type="text" formControlName="lastName" placeholder="Enter Last Name "
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email </label>
+            <input type="text" formControlName="email" placeholder="Enter Email "
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Address </label>
+            <input type="text" formControlName="address" placeholder="Enter Address "
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date Of Birth </label>
+            <input type="text" formControlName="dob" placeholder="(MM-DD-YYYY)"
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }"/>
+            <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+              <div *ngIf="f.dob.errors.required">Date Of Birth is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Salary </label>
+            <input type="text" formControlName="salary" placeholder='Enter Annual Salary Ex. "80000" (in Dollars)'
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.salary.errors }"/>
+            <div *ngIf="submitted && f.salary.errors" class="invalid-feedback">
+              <div *ngIf="f.salary.errors.required">Salary is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Debt </label>
+            <input type="text" formControlName="debt" placeholder="Enter Total Debt "
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.debt.errors }"/>
+            <div *ngIf="submitted && f.debt.errors" class="invalid-feedback">
+              <div *ngIf="f.debt.errors.required">Debt is required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Debt Companies </label>
+            <input type="text" formControlName="debtCompanies" placeholder="Enter Companies which you in debt with "
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.debtCompanies.errors }"/>
+            <div *ngIf="submitted && f.debtCompanies.errors" class="invalid-feedback">
+              <div *ngIf="f.debtCompanies.errors.required">Company names are required</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Monthly Budget </label>
+            <input type="text" formControlName="monthlyBudget" placeholder='Enter Monthly Budget. Ex. "5000" (in Dollars)'
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.monthlyBudget.errors }"/>
+            <div *ngIf="submitted && f.monthlyBudget.errors" class="invalid-feedback">
+              <div *ngIf="f.monthlyBudget.errors.required">Monthly Budget is required</div>
+            </div>
+        </div>
+
+      
+
+        <div>
+            <button [disabled]="loading" class="btn btn-primary" (click)="onSubmit()">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+              Finish
+            </button>
+        </div>
+
+      </form>
+    </div>
+  </div>

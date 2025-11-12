@@ -1,0 +1,10 @@
+.errormsg {
+    font-size: .875em;
+    color: #dc3545;
+  }
+
+
+.successmsg {
+    font-size: .875em;
+    color: darkblue;
+}

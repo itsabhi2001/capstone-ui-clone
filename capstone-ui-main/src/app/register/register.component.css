@@ -1,0 +1,31 @@
+.errormsg {
+  font-size: .875em;
+  color: #dc3545;
+}
+
+.card {
+  margin-left: 20px;
+}
+
+
+.displayed-offer-container {
+  margin-top: 20px;
+}
+
+.custom-button {
+  background-color: #3F51B5;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.custom-button:hover {
+  background-color: #303F9F; /* Darker shade when hovered */
+}
+
+.light-blue{
+  color: #036bfc;
+}
